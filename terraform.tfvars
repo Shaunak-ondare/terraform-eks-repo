@@ -1,6 +1,6 @@
 aws_region   = "ap-south-1"
 cluster_name = "gitops-eks-cluster-prod"
-vpc_cidr     = "10.0.3.0/16"
+vpc_cidr     = "10.3.0.0/16"
 
 eks_cluster_version   = "1.35"
 eks_node_min_size     = 1
