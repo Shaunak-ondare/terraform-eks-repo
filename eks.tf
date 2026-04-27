@@ -18,7 +18,19 @@ module "eks" {
 
       instance_types = var.eks_instance_types
       capacity_type  = "ON_DEMAND"
+
+      # Required for EBS CSI Driver to manage volumes
+      iam_role_additional_policies = {
+        AmazonEBSCSIDriverPolicy = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+      }
     }
+  }
+
+  cluster_addons = {
+    coredns                = {}
+    kube-proxy             = {}
+    vpc-cni                = {}
+    aws-ebs-csi-driver     = {}
   }
 
   enable_cluster_creator_admin_permissions = true
