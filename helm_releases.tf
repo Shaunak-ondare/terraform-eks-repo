@@ -45,8 +45,22 @@ resource "helm_release" "kube_prometheus_stack" {
     name  = "grafana.service.type"
     value = "ClusterIP"
   }
-  
-  # For alerts, you would configure Alertmanager settings here, e.g. Slack/Teams/PagerDuty integration.
+
+  values = var.grafana_smtp_enabled ? [
+    <<-EOF
+    grafana:
+      grafana.ini:
+        smtp:
+          enabled: true
+          host: "${var.grafana_smtp_host}"
+          user: "${var.grafana_smtp_user}"
+          password: """${var.grafana_smtp_password}"""
+          from_address: "${var.grafana_smtp_from_address}"
+          from_name: "${var.grafana_smtp_from_name}"
+          skip_verify: ${var.grafana_smtp_skip_verify}
+          startTLS_policy: "${var.grafana_smtp_starttls_policy}"
+    EOF
+  ] : []
   
   depends_on = [module.eks]
 }

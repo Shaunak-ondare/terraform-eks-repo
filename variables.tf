@@ -63,3 +63,52 @@ variable "prometheus_chart_version" {
   type        = string
   default     = "51.3.0"
 }
+
+variable "grafana_smtp_enabled" {
+  description = "Enable SMTP for Grafana alert email delivery"
+  type        = bool
+  default     = false
+}
+
+variable "grafana_smtp_host" {
+  description = "Grafana SMTP host in host:port format"
+  type        = string
+  default     = ""
+}
+
+variable "grafana_smtp_user" {
+  description = "Grafana SMTP username"
+  type        = string
+  default     = ""
+}
+
+variable "grafana_smtp_password" {
+  description = "Grafana SMTP password or app password"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "grafana_smtp_from_address" {
+  description = "Sender email address for Grafana alerts"
+  type        = string
+  default     = ""
+}
+
+variable "grafana_smtp_from_name" {
+  description = "Sender display name for Grafana alerts"
+  type        = string
+  default     = "Grafana Alerts"
+}
+
+variable "grafana_smtp_skip_verify" {
+  description = "Skip SMTP TLS certificate verification"
+  type        = bool
+  default     = false
+}
+
+variable "grafana_smtp_starttls_policy" {
+  description = "Grafana SMTP StartTLS policy"
+  type        = string
+  default     = ""
+}
